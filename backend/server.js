@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 const PORT = 3001;
@@ -96,4 +98,14 @@ app.delete("/opportunities/:id", async (req, res) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Backend running at http://localhost:${PORT}`);
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static React build
+app.use(express.static(path.join(__dirname, "client", "dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
