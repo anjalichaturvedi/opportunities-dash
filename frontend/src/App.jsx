@@ -6,8 +6,11 @@ import "./index.css";
 const tagColors = {
   Internship: "bg-purple-600",
   Hackathon: "bg-pink-600",
-  "Research Internship": "bg-yellow-600",
+  "Research Fellowship": "bg-yellow-600",
   "Women-only": "bg-blue-600",
+  "Internship" : "bg-green-600",
+  "Scholarship": "bg-orange-600",
+  "Mentorship": "bg-teal-600",
   Other: "bg-gray-600",
 };
 
