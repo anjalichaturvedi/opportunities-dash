@@ -18,10 +18,18 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
 
+console.log("Connecting to MySQL with:", {
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USERNAME,
+  password: process.env.MYSQL_PASSWORD ? '***' : 'missing',
+  database: process.env.MYSQL_DATABASE,
+});
+
+
 // ✅ Create MySQL pool
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER_NAME,
+  user: process.env.MYSQL_USERNAME,
   database: process.env.MYSQL_DATABASE,
   password: process.env.MYSQL_PASSWORD,
   port: process.env.MYSQL_PORT || 3306,
