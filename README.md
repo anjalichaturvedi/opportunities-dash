@@ -66,7 +66,7 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 
 ---
 
-## 🎓 Scholarships
+## Scholarships
 
 | Organization           | Title                                       | Deadline  |
 |-------------------------|---------------------------------------------|-----------|
@@ -74,7 +74,7 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 | Reliance Foundation     | UG Scholarships                             | TBD       |
 | NXP Semiconductors      | NXP India Scholarships                      | TBD       |
 
-
+---
 ## Internships
 
 | Organization         | Title                            | Deadline  |
