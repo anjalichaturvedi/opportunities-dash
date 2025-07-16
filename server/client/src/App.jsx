@@ -60,15 +60,19 @@ function App() {
     <div className="flex items-center gap-2">
       <label className="text-white text-sm">Filter:</label>
       <select
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-        className="appearance-none bg-transparent text-white text-sm px-4 py-[6px] rounded-lg border border-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-400"
-      >
-        <option value="All">All</option>
-        <option value="Hackathon">Hackathon</option>
-        <option value="Women-only">Women-only</option>
-        <option value="Internship">Internship</option>
-      </select>
+  value={filter}
+  onChange={(e) => setFilter(e.target.value)}
+  className="z-50 appearance-none bg-[#1e293b] text-white text-sm px-4 py-[6px] rounded-lg border border-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-400"
+>
+  <option value="All">All</option>
+  <option value="Hackathon">Hackathon</option>
+  <option value="Women-only">Women-only</option>
+  <option value="Internship">Internship</option>
+  <option value="Scholarship">Scholarship</option>
+  <option value="Research Fellowship">Research Fellowship</option>
+  <option value="Mentorship">Mentorship</option>
+</select>
+
     </div>
 
     {/* View */}
