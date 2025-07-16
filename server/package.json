@@ -1,15 +1,17 @@
 {
-  "name": "opportunities-app",
-  "main": "server.js",
+  "name": "opportunities-dash",
+  "version": "1.0.0",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build-client": "cd ../client && npm install && npm run build",
+    "build-client": "cd client && npm install && npm run build && cp -r dist ../dist",
     "postinstall": "npm run build-client"
   },
   "dependencies": {
-    "express": "^4.18.2",
     "cors": "^2.8.5",
+    "express": "^4.18.2",
     "sqlite3": "^5.1.6"
   }
 }
+

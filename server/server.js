@@ -1,49 +1,44 @@
 // server.js
 import express from "express";
 import cors from "cors";
-import sqlite3 from "sqlite3";
-import { open } from "sqlite";
+import sqlite3Pkg from "sqlite3";
+const sqlite3 = sqlite3Pkg.verbose();
 import path from "path";
 import { fileURLToPath } from "url";
 
-const app = express();
-const PORT = 3001;
+// ⛑ Fix __dirname in ESM mode
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// 📦 Setup Express
+const app = express();
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
 
-const dbPromise = open({
-  filename: "./opportunities.db",
-  driver: sqlite3.Database
+// 🗄️ Load SQLite DB
+const dbPath = path.join(__dirname, "opportunities.db");
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) {
+    console.error("❌ Failed to connect to SQLite:", err.message);
+    process.exit(1);
+  }
+  console.log("✅ Connected to SQLite DB");
 });
 
-// Now you can use: const db = await dbPromise; etc.
-
-// Connect to SQLite
-const db = new sqlite3.Database("./opportunities.db", (err) => {
-  if (err) return console.error("DB Error:", err.message);
-  console.log("✅ Connected to SQLite DB.");
-});
-
-// Create table if not exists
-db.run(
-  `CREATE TABLE IF NOT EXISTS opportunities (
+// 🧱 Create table if it doesn't exist
+db.run(`
+  CREATE TABLE IF NOT EXISTS opportunities (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     company TEXT,
     title TEXT,
     category TEXT,
     deadline TEXT
-  )`,
-  (err) => {
-    if (err) console.error("❌ Table creation failed:", err.message);
-  }
-);
+  )
+`);
 
-
-// GET all
+// 📥 API: Get all opportunities
 app.get("/opportunities", (req, res) => {
   db.all("SELECT * FROM opportunities ORDER BY deadline ASC", [], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -51,61 +46,69 @@ app.get("/opportunities", (req, res) => {
   });
 });
 
-// POST
+// ➕ API: Add a new opportunity
 app.post("/opportunities", (req, res) => {
-  let { company, title, category, deadline } = req.body;
-
-  // Convert "2025-04" → "Apr"
-  const monthMap = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  try {
-    const monthIndex = parseInt(deadline.split("-")[1], 10) - 1;
-    deadline = monthMap[monthIndex] || deadline;
-  } catch {
-    console.warn("Invalid deadline format");
-  }
-
+  const { company, title, category, deadline } = req.body;
   if (!company || !title || !category || !deadline) {
     return res.status(400).json({ error: "All fields are required." });
   }
 
-  const query = `INSERT INTO opportunities (company, title, category, deadline)
-                 VALUES (?, ?, ?, ?)`;
+  const query = `INSERT INTO opportunities (company, title, category, deadline) VALUES (?, ?, ?, ?)`;
   db.run(query, [company, title, category, deadline], function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.status(201).json({ id: this.lastID });
   });
 });
 
-// DELETE all
-app.delete("/clear", (req, res) => {
-  db.run("DELETE FROM opportunities", (err) => {
-    if (err) return res.status(500).send("Failed to clear data");
-    res.send("All opportunities deleted.");
+// ✏️ API: Edit opportunity
+app.put("/opportunities/:id", (req, res) => {
+  const id = req.params.id;
+  const fields = req.body;
+  const keys = Object.keys(fields);
+  const values = Object.values(fields);
+
+  if (keys.length === 0) return res.status(400).json({ error: "Nothing to update." });
+
+  const setClause = keys.map((key) => `${key} = ?`).join(", ");
+  const sql = `UPDATE opportunities SET ${setClause} WHERE id = ?`;
+
+  db.run(sql, [...values, id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    if (this.changes > 0) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: "Opportunity not found" });
+    }
   });
 });
 
-// delete by id
-app.delete("/opportunities/:id", async (req, res) => {
-  const db = await dbPromise;
+// ❌ API: Delete opportunity
+app.delete("/opportunities/:id", (req, res) => {
   const id = req.params.id;
-
-  const result = await db.run("DELETE FROM opportunities WHERE id = ?", id);
-
-  if (result.changes > 0) {
-    res.json({ success: true });
-  } else {
-    res.status(404).json({ error: "Opportunity not found" });
-  }
+  db.run("DELETE FROM opportunities WHERE id = ?", id, function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    if (this.changes > 0) {
+      res.json({ success: true });
+    } else {
+      res.status(404).json({ error: "Not found" });
+    }
+  });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Backend running at http://localhost:${PORT}`);
+// ✅ Health check route (for debugging)
+app.get("/ping", (req, res) => {
+  res.send("pong");
 });
 
-// Serve React static files
-app.use(express.static(path.join(__dirname, "../client/dist")));
+// Serve frontend build
+app.use(express.static(path.join(__dirname, "dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+
+// 🚀 Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
