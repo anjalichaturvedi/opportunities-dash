@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/opportunities")
+      .get("http://localhost:3002/opportunities")
       .then((res) => setOpportunities(res.data))
       .catch((err) => console.error("Error fetching opportunities", err));
   }, []);

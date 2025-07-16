@@ -2,47 +2,46 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import "dotenv/config";
 import cors from "cors";
-import pkg from "pg";
+import dotenv from "dotenv";
+import mysql from "mysql2/promise";
 
-const { Pool } = pkg;
+dotenv.config();
 
-// ⛑ Fix __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 🌐 PostgreSQL connection
-const pool = new Pool({
-  user: process.env.POSTGRES_USER,
-  host: process.env.POSTGRES_HOST,
-  database: process.env.POSTGRES_DB,
-  password: process.env.POSTGRES_PASSWORD,
-  port: process.env.POSTGRES_PORT || 5432,
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
-});
-
-// 🌟 Express setup
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 app.use(cors());
 app.use(express.json());
-
-// ✅ Serve built frontend
 app.use(express.static(path.join(__dirname, "dist")));
 
-// ✅ API: Get all opportunities
+// ✅ Create MySQL pool
+const pool = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  database: process.env.MYSQL_DATABASE,
+  password: process.env.MYSQL_PASSWORD,
+  port: process.env.MYSQL_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
+
+// ✅ Get all opportunities
 app.get("/opportunities", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM opportunities ORDER BY deadline ASC");
-    res.json(result.rows);
+    const [rows] = await pool.query("SELECT * FROM opportunities ORDER BY deadline ASC");
+    res.json(rows);
   } catch (err) {
+    console.error("Error fetching opportunities:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// ➕ API: Add opportunity
+// ✅ Add new opportunity
 app.post("/opportunities", async (req, res) => {
   const { company, title, category, deadline } = req.body;
   if (!company || !title || !category || !deadline) {
@@ -50,66 +49,26 @@ app.post("/opportunities", async (req, res) => {
   }
 
   try {
-    const result = await pool.query(
-      "INSERT INTO opportunities (company, title, category, deadline) VALUES ($1, $2, $3, $4) RETURNING id",
+    const [result] = await pool.query(
+      `INSERT INTO opportunities (company, title, category, deadline) VALUES (?, ?, ?, ?)`,
       [company, title, category, deadline]
     );
-    res.status(201).json({ id: result.rows[0].id });
+    res.status(201).json({ id: result.insertId });
   } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// ✏️ API: Edit opportunity
-app.put("/opportunities/:id", async (req, res) => {
-  const id = req.params.id;
-  const fields = req.body;
-  const keys = Object.keys(fields);
-  const values = Object.values(fields);
-
-  if (keys.length === 0) return res.status(400).json({ error: "Nothing to update." });
-
-  const setClause = keys.map((key, i) => `${key} = $${i + 1}`).join(", ");
-  const sql = `UPDATE opportunities SET ${setClause} WHERE id = $${keys.length + 1}`;
-
-  try {
-    const result = await pool.query(sql, [...values, id]);
-    if (result.rowCount > 0) {
-      res.json({ success: true });
-    } else {
-      res.status(404).json({ error: "Opportunity not found" });
-    }
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// ❌ API: Delete opportunity
-app.delete("/opportunities/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    const result = await pool.query("DELETE FROM opportunities WHERE id = $1", [id]);
-    if (result.rowCount > 0) {
-      res.json({ success: true });
-    } else {
-      res.status(404).json({ error: "Not found" });
-    }
-  } catch (err) {
+    console.error("Insert error:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
 // ✅ Health check
-app.get("/ping", (req, res) => {
-  res.send("pong");
-});
+app.get("/ping", (req, res) => res.send("pong"));
 
-// 🎯 Catch-all for React Router
+// ✅ Serve frontend
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-// 🚀 Start server
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
