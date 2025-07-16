@@ -1,3 +1,4 @@
 node_modules/
 dump.sql
 .env.local
+.env

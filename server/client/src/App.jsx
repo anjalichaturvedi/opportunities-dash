@@ -21,14 +21,15 @@ function App() {
   const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
-    axios
-      .get("/opportunities") // relative path
-      .then((res) => {
-        console.log("Fetched opportunities:", res.data); // debug log
-        setOpportunities(res.data);
-      })
-      .catch((err) => console.error("Error fetching opportunities", err));
-  }, []);
+  axios
+    .get("/opportunities")
+    .then((res) => {
+      console.log("✅ Opportunities fetched:", res.data);
+      setOpportunities(res.data);
+    })
+    .catch((err) => console.error("❌ Error fetching opportunities:", err));
+}, []);
+
 
   const getMonth = (monthStr) => monthStr;
 
