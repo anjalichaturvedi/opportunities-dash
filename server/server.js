@@ -25,9 +25,9 @@ const pool = mysql.createPool({
   database: process.env.MYSQL_DATABASE,
   password: process.env.MYSQL_PASSWORD,
   port: process.env.MYSQL_PORT || 3306,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+  ssl: {
+    rejectUnauthorized: false // ✅ Required for Zeabur's remote DB
+  }
 });
 
 // ✅ Get all opportunities
