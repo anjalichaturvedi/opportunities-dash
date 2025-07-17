@@ -56,6 +56,7 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 | Society of Women Engineers (SWE) | SWE Scholarships                      | Feb       |
 | Outreachy             | Outreachy Internship Program                     | Feb       |
 | Google                | Women Techmakers Scholars                         | Mar                |
+| LinkedIn     | LinkedIn Coach-In | Mar       |
 | Google                | Google Girl Hackathon                            | Mar       |
 | Walmart               | Walmart CodeHers                                 | Mar       |
 | Google | Google Girl Scholarship | April
@@ -105,12 +106,4 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 | Google | STEP Internship | Sept
 
 
-
----
-
-## Mentorship
-
-| Organization | Title             | Deadline  |
-|--------------|-------------------|-----------|
-| LinkedIn     | LinkedIn Coach-In | TBD       |
 

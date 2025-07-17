@@ -20,15 +20,14 @@ function App() {
   const [sortBy, setSortBy] = useState("default");
 
   useEffect(() => {
-  axios
-    .get("/opportunities")
-    .then((res) => {
-      console.log("✅ Opportunities fetched:", res.data);
-      setOpportunities(res.data);
-    })
-    .catch((err) => console.error("❌ Error fetching opportunities:", err));
-}, []);
-
+    axios
+      .get("/opportunities")
+      .then((res) => {
+        console.log("✅ Opportunities fetched:", res.data);
+        setOpportunities(res.data);
+      })
+      .catch((err) => console.error("❌ Error fetching opportunities:", err));
+  }, []);
 
   const getMonth = (monthStr) => monthStr;
 
@@ -180,6 +179,28 @@ function App() {
             </table>
           </div>
         )}
+
+        {/* ✅ Footer */}
+        <footer className="mt-20 text-center text-sm text-gray-400 border-t border-slate-800 pt-6">
+          got tired of doomscrolling on linkedin. made by{" "}
+          <a
+            href="https://github.com/anjalichaturvedi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-white"
+          >
+            anjali chaturvedi
+          </a>{" "}
+          at{" "}
+          <a
+            href="https://nodebrew.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-white"
+          >
+            nodebrew
+          </a>
+        </footer>
       </div>
     </div>
   );
