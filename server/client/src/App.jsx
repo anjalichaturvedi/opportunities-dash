@@ -29,7 +29,17 @@ function App() {
       .catch((err) => console.error("❌ Error fetching opportunities:", err));
   }, []);
 
-  const getMonth = (monthStr) => monthStr;
+  const monthOrder = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sept", "Oct", "Nov", "Dec", "TBD"
+  ];
+
+  const monthIndex = (monthStr) => {
+    const idx = monthOrder.findIndex(
+      (m) => m.toLowerCase() === (monthStr || "").toLowerCase()
+    );
+    return idx === -1 ? 12 : idx; // default "TBD" or unknown goes at the end
+  };
 
   const filteredOpps = opportunities
     .filter((o) =>
@@ -49,7 +59,24 @@ function App() {
       return 0;
     });
 
-  const groupedByCategory = [...new Set(filteredOpps.map((o) => o.category || "Other"))];
+  // 🧠 Grouped by category AND month-sorted within each category
+  const groupedByCategory = {};
+  filteredOpps.forEach((opp) => {
+    const cat = opp.category || "Other";
+    if (!groupedByCategory[cat]) groupedByCategory[cat] = [];
+    groupedByCategory[cat].push(opp);
+  });
+  Object.keys(groupedByCategory).forEach((cat) => {
+    groupedByCategory[cat].sort(
+      (a, b) => monthIndex(a.deadline) - monthIndex(b.deadline)
+    );
+  });
+
+  // 🧠 All filteredOpps month-sorted for table view
+  const monthSortedOpps = [...filteredOpps].sort(
+    (a, b) => monthIndex(a.deadline) - monthIndex(b.deadline)
+  );
+
 
   return (
     <div className="font-sans">
@@ -109,46 +136,40 @@ function App() {
           </div>
         </div>
 
-        {view === "Card" ? (
-          groupedByCategory.map((category) => (
+       {view === "Card" ? (
+          Object.entries(groupedByCategory).map(([category, items]) => (
             <div key={category} className="mb-12">
               <h2 className="text-xl font-semibold mb-4 border-b border-gray-700 pb-2">
                 {category}
               </h2>
               <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {filteredOpps
-                  .filter((o) => (o.category || "Other") === category)
-                  .map((opp, idx) => (
-                    <motion.div
-                      key={idx}
-                      whileHover={{ scale: 1.02 }}
-                      className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-4 shadow-md border border-slate-700"
-                    >
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs text-gray-400">
-                          {opp.company}
-                        </span>
-                        <span
-                          className={`px-2 py-1 text-xs rounded-full font-semibold ${
-                            tagColors[opp.category] || "bg-gray-700"
-                          }`}
-                        >
-                          {opp.category}
-                        </span>
-                      </div>
-                      <h3 className="text-base font-semibold mb-1 leading-snug">
-                        {opp.title}
-                      </h3>
-                      <p className="text-xs text-gray-400">
-                        Month: {getMonth(opp.deadline)}
-                      </p>
-                    </motion.div>
-                  ))}
+                {items.map((opp, idx) => (
+                  <motion.div
+                    key={idx}
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-4 shadow-md border border-slate-700"
+                  >
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-xs text-gray-400">{opp.company}</span>
+                      <span
+                        className={`px-2 py-1 text-xs rounded-full font-semibold ${
+                          tagColors[opp.category] || "bg-gray-700"
+                        }`}
+                      >
+                        {opp.category}
+                      </span>
+                    </div>
+                    <h3 className="text-base font-semibold mb-1 leading-snug">
+                      {opp.title}
+                    </h3>
+                    <p className="text-xs text-gray-400">Month: {opp.deadline}</p>
+                  </motion.div>
+                ))}
               </div>
             </div>
           ))
         ) : (
-          <div className="overflow-x-auto mt-6">
+            <div className="overflow-x-auto mt-6">
             <table className="min-w-full text-sm border-separate border-spacing-y-2">
               <thead>
                 <tr className="text-left text-gray-400">
@@ -159,7 +180,7 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {filteredOpps.map((opp, idx) => (
+                {monthSortedOpps.map((opp, idx) => (
                   <tr key={idx} className="bg-slate-800 text-white">
                     <td className="py-2 px-4 font-medium">{opp.title}</td>
                     <td className="py-2 px-4">{opp.company}</td>
@@ -172,14 +193,13 @@ function App() {
                         {opp.category}
                       </span>
                     </td>
-                    <td className="py-2 px-4">{getMonth(opp.deadline)}</td>
+                    <td className="py-2 px-4">{opp.deadline}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         )}
-
         {/* ✅ Footer */}
         <footer className="mt-20 text-center text-sm text-gray-400 border-t border-slate-800 pt-6">
           got tired of doomscrolling on linkedin. made by{" "}
