@@ -9,30 +9,42 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 
 ## Hackathons
 
-| Company          | Title                                               | Deadline  |
-|------------------|-----------------------------------------------------|-----------|
-| Deloitte         | Deloitte Hacksplosion                               | Jan       |
-| HSBC T-Hub       | HSBC Technology India Hackathon 2025                | Mar       |
-| Morgan Stanley   | Morgan Stanley India Code to Give Hackathon 2025    | Mar       |
-| Goldman Sachs    | Goldman Sachs India Hackathon 2025                  | Apr       |
-| HERE Technologies| GeoAI Hackathon 2025                                | Apr       |
-| JP Morgan        | JP Morgan Code for Good India                       | Apr       |
-| SAP              | SAP Hackfest                                        | May       |
-| Cisco            | Code with Cisco                                     | Jun       |
-| Samsung          | Samsung Solve for Tomorrow                          | Jun       |
-| Shell            | Shell Hackathon                                     | Jun       |
-| Flipkart         | Flipkart GRiD 7.0                                   | Jul       |
-| Infosys          | HackWithInfy                                        | Jul       |
-| Walmart          | Walmart Sparkathon                                  | Jul       |
-| Adobe            | Adobe India Hackathon                               | Jul       |
-| Amazon           | Amazon HackOn                                       | Jul       |
-| Juspay           | Juspay Hiring Challenge                             | Jul       |
-| Tata Technologies| Tata Technologies Innovent                          | Jul       |
-| Smart India      | Smart India Hackathon                               | Aug       |
-| DigitalOcean     | Hacktoberfest                                       | Oct       |
-| Google           | Google Code for Summer                              | TBD       |
-| Ericsson         | Ericsson Student Innovation Challenge               | TBD       |
-| Code for Bharat  | Code for Bharat Hackathon                           | TBD       |
+| Company/Org               | Title                                          | Deadline     |
+|---------------------------|-----------------------------------------------|--------------|
+| DRDO                      | Dare to Dream Innovation Contest              | Jan          |
+| Accenture                 | Accenture Innovation Challenge                | Jan          |
+| Deloitte                  | Deloitte Hacksplosion                         | Jan          |
+| HSBC T-Hub                | HSBC Technology India Hackathon 2025          | Mar          |
+| Morgan Stanley            | Morgan Stanley India Code to Give Hackathon   | Mar          |
+| SAP                       | SAP Hackfest                                  | May          |
+| Cisco                     | Code with Cisco                               | Jun          |
+| Samsung                   | Samsung Solve for Tomorrow                    | Jun          |
+| Shell                     | Shell Hackathon                               | Jun          |
+| J.P. Morgan               | J.P. Morgan Code for Good                     | Apr          |
+| Goldman Sachs             | Goldman Sachs India Hackathon 2025           | Apr          |
+| HERE Technologies         | GeoAI Hackathon 2025                          | Apr          |
+| Flipkart                  | Flipkart Grid                                 | Jul          |
+| Juspay                    | Juspay Hiring Hackathon                       | Jul          |
+| American Express          | American Express Campus Challenge             | Jul          |
+| L’Oréal                   | L’Oréal Sustainability Challenge              | Jul          |
+| Infosys                   | HackWithInfy                                  | Jul          |
+| Walmart                   | Walmart Sparkathon                            | Jul          |
+| Adobe                     | Adobe India Hackathon                         | Jul          |
+| Amazon                    | Amazon HackOn                                 | Jul          |
+| Juspay                    | Juspay Hiring Challenge                       | Jul          |
+| Tata Technologies         | Tata Technologies Innovent                    | Jul          |
+| Bajaj Finserv             | Bajaj Finserv HackRx                          | Aug          |
+| Govt. of India            | Smart India Hackathon (SIH)                   | Aug          |
+| TCS                       | TCS CodeVita                                  | Sept         |
+| Amazon                    | Amazon ML Challenge                           | Sept         |
+| Microsoft                 | Microsoft Imagine Cup                         | Oct          |
+| Tata                      | Tata Crucible Campus Hackathon                | Oct          |
+| Tata                      | Tata Imagination Challenge                    | Oct          |
+| DigitalOcean              | Hacktoberfest                                 | Oct          |
+| Google                    | Google Code for Summer                        | TBD          |
+| Ericsson                  | Ericsson Student Innovation Challenge         | TBD          |
+| Code for Bharat           | Code for Bharat Hackathon                     | TBD          |
+
 
 ---
 
@@ -40,14 +52,16 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 
 | Company               | Title                                            | Deadline  |
 |------------------------|--------------------------------------------------|-----------|
+| WISE (Women in Science & Engg.)| WISE Mentorship India                   | Jan       |
 | Society of Women Engineers (SWE) | SWE Scholarships                      | Feb       |
 | Outreachy             | Outreachy Internship Program                     | Feb       |
+| Google                | Women Techmakers Scholars                         | Mar                |
 | Google                | Google Girl Hackathon                            | Mar       |
 | Walmart               | Walmart CodeHers                                 | Mar       |
+| Google | Google Girl Scholarship | April
 | Nutanix               | Nutanix Advancing Women in Technology Scholarship| May       |
 | Meesho                | ScriptedByHer Hackathon                          | Jun       |
 | AWS                   | AWS She Builds                                   | Jun       |
-| Google | Google Girl Scholarship | April
 
 ---
 
@@ -71,16 +85,25 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 | Organization           | Title                                       | Deadline  |
 |-------------------------|---------------------------------------------|-----------|
 | Bharti Airtel Foundation| Bharti Airtel Scholarship Program 2025–26   | Jul       |
-| Reliance Foundation     | UG Scholarships                             | TBD       |
-| NXP Semiconductors      | NXP India Scholarships                      | TBD       |
+| Aditya Birla                   | Aditya Birla Scholarship                   | Aug           |
+| Rolls-Royce                    | Rolls-Royce Unnati Scholarship             | Aug           |
+| Panasonic                      | Ratti Chhatr Scholarship                   | Aug           |
+| NXP Semiconductors      | NXP India Scholarships                      | Sept       |
+| Reliance Foundation     | UG Scholarships                             | Oct       |
+| Tata Trusts                    | Tata Scholarship for Engineering           | Dec           |
 
 
 ## Internships
 
 | Organization         | Title                            | Deadline  |
 |----------------------|----------------------------------|-----------|
+| CERN                          | CERN Openlab Summer Internship                   | Jan          |
+| Flipkart                      | Flipkart Runway                                  | Mar      |
+| GitHub                         | GitHub Externships                               | May      |
+| Goldman Sachs                 | Summer Analyst Internship                        | Jun          |
+| Ethereum Foundation  | Ethereum Season of Internships   | Jun       |
 | Google | STEP Internship | Sept
-| Ethereum Foundation  | Ethereum Season of Internships   | TBD       |
+
 
 
 ---
@@ -90,3 +113,4 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 | Organization | Title             | Deadline  |
 |--------------|-------------------|-----------|
 | LinkedIn     | LinkedIn Coach-In | TBD       |
+

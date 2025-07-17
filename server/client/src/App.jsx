@@ -4,12 +4,11 @@ import { motion } from "framer-motion";
 import "./index.css";
 
 const tagColors = {
-  Internship: "bg-purple-600",
-  Hackathon: "bg-pink-600",
-  "Research Fellowship": "bg-yellow-600",
+  Internships: "bg-purple-600",
+  Hackathons: "bg-pink-600",
+  "Research Fellowships": "bg-yellow-600",
   "Women-only": "bg-blue-600",
-  Scholarship: "bg-orange-600",
-  Mentorship: "bg-teal-600",
+  Scholarships: "bg-orange-600",
   Other: "bg-gray-600",
 };
 
