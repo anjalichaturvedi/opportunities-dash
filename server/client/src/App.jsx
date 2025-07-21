@@ -38,7 +38,7 @@ function App() {
     const idx = monthOrder.findIndex(
       (m) => m.toLowerCase() === (monthStr || "").toLowerCase()
     );
-    return idx === -1 ? 12 : idx; // default "TBD" or unknown goes at the end
+    return idx === -1 ? 12 : idx;
   };
 
   const filteredOpps = opportunities
@@ -47,19 +47,17 @@ function App() {
         ? true
         : o.category?.toLowerCase().trim() === filter.toLowerCase().trim()
     )
-    .filter((o) =>
-      search
-        ? o.title.toLowerCase().includes(search.toLowerCase()) ||
-          o.company.toLowerCase().includes(search.toLowerCase())
-        : true
-    )
+    .filter((o) => {
+      const category = o.category?.toLowerCase().trim();
+      const selected = filter.toLowerCase().trim();
+      return filter === "All" || category === selected;
+    })
     .sort((a, b) => {
       if (sortBy === "deadline") return a.deadline.localeCompare(b.deadline);
       if (sortBy === "title") return a.title.localeCompare(b.title);
       return 0;
     });
 
-  // 🧠 Grouped by category AND month-sorted within each category
   const groupedByCategory = {};
   filteredOpps.forEach((opp) => {
     const cat = opp.category || "Other";
@@ -72,27 +70,20 @@ function App() {
     );
   });
 
-  // 🧠 All filteredOpps month-sorted for table view
   const monthSortedOpps = [...filteredOpps].sort(
     (a, b) => monthIndex(a.deadline) - monthIndex(b.deadline)
   );
-
 
   return (
     <div className="font-sans">
       <div className="min-h-screen bg-[#0f172a] text-white font-sans px-6 py-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 flex-wrap">
-          {/* Title */}
           <div className="flex items-center gap-3">
             <span className="text-3xl">🎓</span>
-            <h1 className="text-3xl font-extrabold text-white">
-              Opportunities Dashboard
-            </h1>
+            <h1 className="text-3xl font-extrabold text-white">Opportunities Dashboard</h1>
           </div>
 
-          {/* Filter controls */}
           <div className="flex flex-wrap items-center gap-3 mt-2 md:mt-0">
-            {/* Filter */}
             <div className="flex items-center gap-2">
               <label className="text-white text-sm">Filter:</label>
               <select
@@ -101,16 +92,15 @@ function App() {
                 className="z-50 appearance-none bg-[#1e293b] text-white text-sm px-4 py-[6px] rounded-lg border border-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-400"
               >
                 <option value="All">All</option>
-                <option value="Hackathon">Hackathon</option>
+                <option value="Hackathons">Hackathon</option>
                 <option value="Women-only">Women-only</option>
-                <option value="Internship">Internship</option>
-                <option value="Scholarship">Scholarship</option>
-                <option value="Research Fellowship">Research Fellowship</option>
-                <option value="Mentorship">Mentorship</option>
+                <option value="Internships">Internship</option>
+                <option value="Scholarships">Scholarship</option>
+                <option value="Research Fellowships">Research Fellowship</option>
+                <option value="Mentorships">Mentorship</option>
               </select>
             </div>
 
-            {/* View */}
             <div className="flex items-center gap-2">
               <label className="text-white text-sm">View:</label>
               <select
@@ -123,7 +113,6 @@ function App() {
               </select>
             </div>
 
-            {/* Search */}
             <div>
               <input
                 type="text"
@@ -136,12 +125,10 @@ function App() {
           </div>
         </div>
 
-       {view === "Card" ? (
+        {view === "Card" ? (
           Object.entries(groupedByCategory).map(([category, items]) => (
             <div key={category} className="mb-12">
-              <h2 className="text-xl font-semibold mb-4 border-b border-gray-700 pb-2">
-                {category}
-              </h2>
+              <h2 className="text-xl font-semibold mb-4 border-b border-gray-700 pb-2">{category}</h2>
               <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {items.map((opp, idx) => (
                   <motion.div
@@ -151,25 +138,33 @@ function App() {
                   >
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-xs text-gray-400">{opp.company}</span>
-                      <span
-                        className={`px-2 py-1 text-xs rounded-full font-semibold ${
-                          tagColors[opp.category] || "bg-gray-700"
-                        }`}
-                      >
+                      <span className={`px-2 py-1 text-xs rounded-full font-semibold ${tagColors[opp.category] || "bg-gray-700"}`}>
                         {opp.category}
                       </span>
                     </div>
-                    <h3 className="text-base font-semibold mb-1 leading-snug">
-                      {opp.title}
-                    </h3>
-                    <p className="text-xs text-gray-400">Month: {opp.deadline}</p>
+                    <h3 className="text-base font-semibold mb-1 leading-snug">{opp.title}</h3>
+                    <p className="text-xs text-gray-400 mb-2">Month: {opp.deadline}</p>
+                    {opp.applyLink ? (
+                      <a
+                        href={opp.applyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block text-xs text-white bg-green-600 px-3 py-1 rounded-full hover:bg-green-700"
+                      >
+                        Apply
+                      </a>
+                    ) : (
+                      <span className="inline-block text-xs bg-gray-600 px-3 py-1 rounded-full cursor-not-allowed opacity-60">
+                        Closed
+                      </span>
+                    )}
                   </motion.div>
                 ))}
               </div>
             </div>
           ))
         ) : (
-            <div className="overflow-x-auto mt-6">
+          <div className="overflow-x-auto mt-6">
             <table className="min-w-full text-sm border-separate border-spacing-y-2">
               <thead>
                 <tr className="text-left text-gray-400">
@@ -177,6 +172,7 @@ function App() {
                   <th className="px-4 py-2">Company</th>
                   <th className="px-4 py-2">Category</th>
                   <th className="px-4 py-2">Deadline</th>
+                  <th className="px-4 py-2">Apply</th>
                 </tr>
               </thead>
               <tbody>
@@ -185,22 +181,32 @@ function App() {
                     <td className="py-2 px-4 font-medium">{opp.title}</td>
                     <td className="py-2 px-4">{opp.company}</td>
                     <td className="py-2 px-4">
-                      <span
-                        className={`px-2 py-1 text-xs rounded-full ${
-                          tagColors[opp.category] || "bg-gray-700"
-                        }`}
-                      >
+                      <span className={`px-2 py-1 text-xs rounded-full ${tagColors[opp.category] || "bg-gray-700"}`}>
                         {opp.category}
                       </span>
                     </td>
                     <td className="py-2 px-4">{opp.deadline}</td>
+                    <td className="py-2 px-4">
+                      {opp.applyLink ? (
+                        <a
+                          href={opp.applyLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-green-400 underline hover:text-green-300"
+                        >
+                          Apply
+                        </a>
+                      ) : (
+                        <span className="text-gray-500">Closed</span>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         )}
-        {/* ✅ Footer */}
+
         <footer className="mt-20 text-center text-sm text-gray-400 border-t border-slate-800 pt-6">
           got tired of doomscrolling on linkedin. made by{" "}
           <a
@@ -213,7 +219,7 @@ function App() {
           </a>{" "}
           at{" "}
           <a
-            href="https://nodebrew.tech"
+            href="https://nodebrew.org"
             target="_blank"
             rel="noopener noreferrer"
             className="underline hover:text-white"
