@@ -1,7 +1,7 @@
 # Opportunities Tracker
 
 This is a **non-exhaustive list** of student opportunities that open year-round, including **hackathons, fellowships, internships, scholarships, and more**, to help you keep track and stay ahead.  
-If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@nodebrew.org) or open a PR.  
+If you want to add an opportunity, open a PR.  
 
 > maintained by [@anjalichaturvedi](https://github.com/anjalichaturvedi) and [@nodebrew](https://github.com/nodebrewhq)
 
