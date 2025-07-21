@@ -105,4 +105,5 @@ If you want to add an opportunity, open a PR.
 | GitHub               | GitHub Externships               | May       |      |
 | Goldman Sachs        | Summer Analyst Internship        | Jun       |      |
 | Ethereum Foundation  | Ethereum Season of Internships   | Jun       |      |
+| Amazon               | Amazon ML Summer School                       Jul         [Apply Here](https://www.scaler.com/partnerships/amazon?utm_source=linkedin)
 | Google               | STEP Internship                  | Sept      |      |
