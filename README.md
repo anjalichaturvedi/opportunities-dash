@@ -49,20 +49,21 @@ If you want to add an opportunity, mail [anjali@nodebrew.org](mailto:anjali@node
 
 ## Women-only
 
-| Company/Org          | Title                                             | Deadline  | Apply Link |
-| Uber                 | Uber She++                                        | Jan        |       |
-| WISE                 | WISE Mentorship India                             | Jan       |      |
-| SWE                  | SWE Scholarships                                  | Feb       |      |
-| Outreachy            | Outreachy Internship Program                      | Feb       |      |
-| Google               | Women Techmakers Scholars                         | Mar       |      |
-| LinkedIn             | LinkedIn Coach-In                                 | Mar       |      |
-| Google               | Google Girl Hackathon                             | Mar       |      |
-| Walmart              | Walmart CodeHers                                  | Mar       |      |
-| Google               | Google Girl Scholarship                           | Apr       | https://www.iie.org/programs/generationgoogle/generation-google-scholarship-for-women-in-computer-science-asia-pacific-region-apac/    |
-| Nutanix              | Advancing Women in Tech Scholarship               | May       |      |
-| Meesho               | ScriptedByHer Hackathon                           | Jun       |      |
-| AWS                  | AWS She Builds                                    | Jun       |      |
-| D.E. Shaw | Ascend Educare Program | Sept | |
+| Company/Org | Title                           | Deadline | Apply Link                                                                                                                                              |
+| :---------- | :------------------------------ | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Uber        | Uber She++                      |   Jan    |                                                                                                                                                         |
+| WISE        | WISE Mentorship India           |   Jan    |                                                                                                                                                         |
+| SWE         | SWE Scholarships                |   Feb    |                                                                                                                                                         |
+| Outreachy   | Outreachy Internship Program    |   Feb    |                                                                                                                                                         |
+| Google      | Women Techmakers Scholars       |   Mar    |                                                                                                                                                         |
+| LinkedIn    | LinkedIn Coach-In               |   Mar    |                                                                                                                                                         |
+| Google      | Google Girl Hackathon           |   Mar    |                                                                                                                                                         |
+| Walmart     | Walmart CodeHers                |   Mar    |                                                                                                                                                         |
+| Google      | Google Girl Scholarship         |   Apr    | [Apply Here](https://www.iie.org/programs/generationgoogle/generation-google-scholarship-for-women-in-computer-science-asia-pacific-region-apac/) |
+| Nutanix     | Advancing Women in Tech Scholarship |   May    |                                                                                                                                                         |
+| Meesho      | ScriptedByHer Hackathon         |   Jun    |                                                                                                                                                         |
+| AWS         | AWS She Builds                  |   Jun    |                                                                                                                                                         |
+| D.E. Shaw   | Ascend Educare Program          |   Sept   |                                                                                                                                                         |
 
 ---
 
