@@ -58,11 +58,11 @@ If you want to add an opportunity, open a PR.
 | Google      | Women Techmakers Scholars       |   Mar    |                                                                                                                                                         |
 | LinkedIn    | LinkedIn Coach-In               |   Mar    |                                                                                                                                                         |
 | Google      | Google Girl Hackathon           |   Mar    |                                                                                                                                                         |
-| Walmart     | Walmart CodeHers                |   Mar    |                                                                                                                                                         |
-| Google      | Google Girl Scholarship         |   Apr    | [Apply Here](https://www.iie.org/programs/generationgoogle/generation-google-scholarship-for-women-in-computer-science-asia-pacific-region-apac/) |
+| Walmart     | Walmart CodeHers                |   Mar    |                                                                                                                                                         
 | Nutanix     | Advancing Women in Tech Scholarship |   May    |                                                                                                                                                         |
 | Meesho      | ScriptedByHer Hackathon         |   Jun    |                                                                                                                                                         |
-| AWS         | AWS She Builds                  |   Jun    |                                                                                                                                                         |
+| AWS         | AWS She Builds                  |   Jun    |  
+| Google      | Google Girl Scholarship         |   Aug    | [Apply Here](https://www.iie.org/programs/generationgoogle/generation-google-scholarship-for-women-in-computer-science-asia-pacific-region-apac/) ||
 | D.E. Shaw   | Ascend Educare Program          |   Sept   |                                                                                                                                                         |
 
 ---
